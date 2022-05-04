@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import React, { useState, useEffect } from "react";
 import GetIcon from "./GetIcon";
-import Background from "../images/svg/blurry-gradient-haikei.svg"
+import GetBackground from "./GetBackground";
 
 export default function WeatherCard(props) {
   const API_KEY = "ca526e5c9969d73403afa49016f1f9b6";
@@ -40,6 +40,7 @@ export default function WeatherCard(props) {
     return (
       <View style={styles.card}>
         <View style={styles.container}>
+          <GetBackground id={data?.weather[0].icon}></GetBackground>
           <View style={styles.header}>
             <Text style={styles.headerText}>{data?.name} | {getCounty()}</Text>
           </View>

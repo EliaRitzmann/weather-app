@@ -27,7 +27,8 @@ export default function App() {
     cards.push({id: 0, lon: location.coords.longitude, lat: location.coords.latitude, cL: true})
   }
     cards.push({id: 1, lon: 8.545094, lat: 47.373878})
-    cards.push({id: 2, lon: 8.545094, lat: 47.373878})
+    cards.push({id: 2, lon: 13.381777, lat: 52.531677})
+    cards.push({id: 2, lon: -73.935242, lat: 40.730610})
     
 
 
@@ -70,7 +71,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     maxHeight: 50,
-    backgroundColor: "white"
+    backgroundColor: "white",
+    marginTop: -20,
   },
   input: {
 
