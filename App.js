@@ -24,21 +24,55 @@ export default function App() {
   }, []);
 
   if(location){
-    cards.push(<WeatherCard id={0} lon={location.coords.longitude} lat={location.coords.latitude}></WeatherCard>)
+    cards.push({id: 0, lon: location.coords.longitude, lat: location.coords.latitude, cL: true})
   }
-  
+    cards.push({id: 1, lon: 8.545094, lat: 47.373878})
+    cards.push({id: 2, lon: 8.545094, lat: 47.373878})
+    
+
+
+    const renderItem = ({ item }) => (
+      <WeatherCard lon={item.lon} lat={item.lat} cL={item.cL}></WeatherCard>
+    );
+
+
+
   return (
+    
     <SafeAreaView style={styles.container}>
-        {cards}
+        <Text style={styles.title}>Weather App</Text>
+        <View style={styles.header}>
+          <TextInput style={styles.input} placeholder="your city"></TextInput>
+          <Button title="add"></Button>
+        </View>
+        <FlatList style={styles.list} data={cards} renderItem={renderItem} keyExtractor={item => item.id}/>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "white",
+    height: "100%",
+    width: "100%"
   },
+  title: {
+    color: "white"
+  },
+  list: {
+    width: "100%",
+    flex: 1,
+    alignContent: "center",
+  },
+  header: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    maxHeight: 50,
+    backgroundColor: "white"
+  },
+  input: {
+
+  }
 });
