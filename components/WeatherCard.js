@@ -35,8 +35,8 @@ export default function WeatherCard(props) {
       return data?.sys.country
     }
   }
-
-  if (data) {
+  console.log(data)
+  if (data?.name) {
     return (
       <View style={styles.card}>
         <View style={styles.container}>
@@ -47,7 +47,7 @@ export default function WeatherCard(props) {
           <View style={styles.content}>
             <View style={styles.leftContainer}>
               <GetIcon id={data?.weather[0].icon}></GetIcon>
-              <Text style={styles.leftContainerText}>{data?.weather[0].description}</Text>
+              <Text style={styles.leftContainerText} numberOfLines={1}>{data?.weather[0].description}</Text>
             </View>
             <View style={styles.rightContainer}>
               <Text style={styles.temperature}>{data?.main.temp + "°"}</Text>
@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   leftContainer: {
-    width: "50%",
     flex: 1,
     marginTop: -20
   },
@@ -104,10 +103,9 @@ const styles = StyleSheet.create({
     marginLeft: 18,
     color: "white",
     fontSize: 16,
-    fontWeight: "500"
+    fontWeight: "500",
   },
   rightContainer: {
-    width: "50%",
     flex: 1,
     flexDirection: "row-reverse",
     margin: 20,
