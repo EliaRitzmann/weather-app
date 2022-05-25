@@ -9,6 +9,7 @@ import {
   Button,
   Alert,
   FlatList,
+  Keyboard,
 } from "react-native";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -42,7 +43,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    getData()
+    getData();
   }, []);
 
   async function getData() {
@@ -56,35 +57,39 @@ export default function App() {
     }
   }
 
-  
-
   async function addCity() {
-    let place = null
+    let place = null;
     await fetch(
-      "http://api.openweathermap.org/geo/1.0/direct?q=" + textField + "&limit=10&appid=" + API_KEY
+      "http://api.openweathermap.org/geo/1.0/direct?q=" +
+        textField +
+        "&limit=10&appid=" +
+        API_KEY
     )
       .then((response) => response.json())
-      .then((info) => place = {lat: info[0].lat, lon: info[0].lon})
-      .catch((error) => Alert.alert('Fehler', "Die eingegebene Stadt gibt es nicht!", [
-        { text: 'OK', onPress: () => console.log('OK Pressed') },
-      ]));
+      .then((info) => (place = { lat: info[0].lat, lon: info[0].lon }))
+      .catch((error) =>
+        Alert.alert("Fehler", "Die eingegebene Stadt gibt es nicht!", [
+          { text: "OK", onPress: () => console.log("OK Pressed") },
+        ])
+      );
 
-    if(place){
+    if (place) {
       try {
-        console.log("hallo" + place)
+        console.log("hallo" + place);
         await AsyncStorage.setItem("data", JSON.stringify([...data, place]));
         setData((oldArray) => [...oldArray, place]);
       } catch (e) {
         // saving error
-        console.log("ich hasse das alles");
+        console.log(e);
       }
     }
-    setTextField("")
+    setTextField("");
+    Keyboard.dismiss();
   }
 
-  async function clearList(){
-      await AsyncStorage.clear();
-      setData("")
+  async function clearList() {
+    await AsyncStorage.clear();
+    setData("");
   }
 
   if (location) {
@@ -116,6 +121,7 @@ export default function App() {
           onChangeText={setTextField}
           placeholderTextColor="gray"
           onEndEditing={addCity}
+          onSubmitEditing={Keyboard.dismiss}
         ></TextInput>
         <Button title="add" onPress={addCity}></Button>
         <Button title="clear" onPress={clearList}></Button>

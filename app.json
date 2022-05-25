@@ -28,6 +28,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "a simple weather app",
+    "githubUrl": "https://github.com/EliaRitzmann/weather-app"
   }
 }
