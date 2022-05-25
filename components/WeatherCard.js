@@ -2,9 +2,10 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import React, { useState, useEffect } from "react";
 import GetIcon from "./GetIcon";
 import GetBackground from "./GetBackground";
+import { getApiKey } from "../api/apikey";
 
 export default function WeatherCard(props) {
-  const API_KEY = "ca526e5c9969d73403afa49016f1f9b6";
+  const API_KEY = getApiKey();
   const [data, setData] = useState(null);
 
   useEffect(() => {

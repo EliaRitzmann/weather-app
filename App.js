@@ -15,10 +15,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import * as Location from "expo-location";
 import WeatherCard from "./components/WeatherCard";
-import { useState } from "react/cjs/react.production.min";
+import { getApiKey } from "./api/apikey";
 
 export default function App() {
-  const API_KEY = "ca526e5c9969d73403afa49016f1f9b6";
+  const API_KEY = getApiKey();
   const [location, setLocation] = React.useState(null);
   const [data, setData] = React.useState([]);
   const [textField, setTextField] = React.useState("");
@@ -79,8 +79,7 @@ export default function App() {
         console.log("ich hasse das alles");
       }
     }
-    
-    
+    setTextField("")
   }
 
   async function clearList(){
@@ -107,6 +106,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="dark"></StatusBar>
       <Text style={styles.title}>Weather App</Text>
       <View style={styles.header}>
         <TextInput
@@ -115,6 +115,7 @@ export default function App() {
           value={textField}
           onChangeText={setTextField}
           placeholderTextColor="gray"
+          onEndEditing={addCity}
         ></TextInput>
         <Button title="add" onPress={addCity}></Button>
         <Button title="clear" onPress={clearList}></Button>
