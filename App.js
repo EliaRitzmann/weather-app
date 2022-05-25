@@ -73,6 +73,8 @@ export default function App() {
         ])
       );
 
+    Keyboard.dismiss();
+
     if (place) {
       try {
         console.log("hallo" + place);
@@ -84,7 +86,7 @@ export default function App() {
       }
     }
     setTextField("");
-    Keyboard.dismiss();
+    
   }
 
   async function clearList() {
@@ -121,7 +123,6 @@ export default function App() {
           onChangeText={setTextField}
           placeholderTextColor="gray"
           onEndEditing={addCity}
-          onSubmitEditing={Keyboard.dismiss}
         ></TextInput>
         <Button title="add" onPress={addCity}></Button>
         <Button title="clear" onPress={clearList}></Button>
